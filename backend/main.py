@@ -27,9 +27,13 @@ from fastapi.responses import FileResponse, JSONResponse, StreamingResponse
 # ──────────────────────────────────────────────────────────────────────────────
 app = FastAPI(title="FrameForge API", version="1.0.0")
 
+# In production set ALLOWED_ORIGINS="https://your-app.vercel.app"
+_raw_origins = os.getenv("ALLOWED_ORIGINS", "*")
+ALLOWED_ORIGINS = [o.strip() for o in _raw_origins.split(",")] if _raw_origins != "*" else ["*"]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -296,4 +300,6 @@ async def delete_session(session_id: str, background_tasks: BackgroundTasks):
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run("main:app", host="0.0.0.0", port=8000, reload=True)
+    port = int(os.getenv("PORT", 8000))
+    reload = os.getenv("ENVIRONMENT", "development") == "development"
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=reload)

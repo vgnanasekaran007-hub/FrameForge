@@ -1,5 +1,6 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import './App.css';
+import { apiUrl } from './api.js';
 
 /* ─────────── helpers ─────────── */
 const fmt = (s) => {
@@ -80,7 +81,7 @@ function App() {
 
     return new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
-      xhr.open('POST', '/upload');
+      xhr.open('POST', apiUrl('/upload'));
 
       xhr.upload.onprogress = (e) => {
         if (e.lengthComputable) {
@@ -219,7 +220,7 @@ function App() {
     fd.append('scale', scale);
     if (mode === 'single') fd.append('timestamp', currentTime);
 
-    const res = await fetch('/extract', { method: 'POST', body: fd });
+    const res = await fetch(apiUrl('/extract'), { method: 'POST', body: fd });
     if (!res.ok) {
       const err = await res.json().catch(() => ({ detail: 'Extraction failed' }));
       throw new Error(err.detail || 'Extraction failed');
@@ -297,7 +298,7 @@ function App() {
         const enriched = result.map(f => ({
           ...f,
           time: (f.index - 1) * (mode === 'interval' ? interval : 1 / (videoMeta?.fps || 30)),
-          url: f.url,   // backend URL
+          url: apiUrl(f.url),   // backend URL — prefixed for production
         }));
         setFrames(enriched);
         setExtractMsg(`✓ ${enriched.length} frames extracted by FFmpeg`);
@@ -347,7 +348,7 @@ function App() {
         fd.append('in_point', 0);
         fd.append('out_point', duration);
 
-        const res = await fetch('/extract', { method: 'POST', body: fd });
+        const res = await fetch(apiUrl('/extract'), { method: 'POST', body: fd });
         if (res.ok) {
           const data = await res.json();
           const f = data.frames[0];
@@ -415,7 +416,7 @@ function App() {
     // Use backend ZIP endpoint if session available
     if (sessionId && backendStatus === 'ready' && !frames[0]?.isBrowserFrame) {
       const a = document.createElement('a');
-      a.href = `/download/${sessionId}`;
+      a.href = apiUrl(`/download/${sessionId}`);
       a.download = `frameforge_export.zip`;
       a.click();
       return;
