@@ -1,0 +1,267 @@
+/* FrameForge Design System — Extracted from Stitch Project 3797757943808036255 */
+/* Fonts: Geist (headlines/body) + JetBrains Mono (labels/mono) */
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
+
+/* ========== DESIGN TOKENS (CSS Custom Properties) ========== */
+:root {
+  /* Canvas & Surfaces */
+  --background: #101112;
+  --surface: #121314;
+  --surface-dim: #121314;
+  --surface-bright: #39393a;
+  --surface-container-lowest: #0d0e0f;
+  --surface-container-low: #1b1c1d;
+  --surface-container: #1f2021;
+  --surface-container-high: #292a2b;
+  --surface-container-highest: #343536;
+  --surface-variant: #343536;
+
+  /* Text & Content */
+  --on-surface: #e3e2e3;
+  --on-surface-variant: #c2c9b3;
+  --on-background: #e3e2e3;
+  --primary: #fdfff2;
+  --on-primary: #203700;
+  --secondary: #c4c8c2;
+  --on-secondary: #2d312e;
+  --tertiary: #fffeff;
+  --on-tertiary: #452b00;
+
+  /* Accent — Electric Lime */
+  --primary-container: #b8f36b;
+  --on-primary-container: #456f00;
+  --primary-fixed: #b9f46c;
+  --primary-fixed-dim: #9ed753;
+  --on-primary-fixed: #102000;
+  --on-primary-fixed-variant: #304f00;
+  --inverse-primary: #416900;
+
+  /* Secondary Containers */
+  --secondary-container: #434844;
+  --on-secondary-container: #b2b6b1;
+  --secondary-fixed: #e0e3de;
+  --secondary-fixed-dim: #c4c8c2;
+
+  /* Tertiary (Amber/Warning) */
+  --tertiary-container: #ffdcb0;
+  --on-tertiary-container: #895a00;
+  --tertiary-fixed: #ffddb3;
+  --tertiary-fixed-dim: #ffb951;
+
+  /* Error */
+  --error: #ffb4ab;
+  --on-error: #690005;
+  --error-container: #93000a;
+  --on-error-container: #ffdad6;
+
+  /* Borders & Separators */
+  --outline: #8d937f;
+  --outline-variant: #434938;
+  --surface-tint: #9ed753;
+
+  /* Inverse */
+  --inverse-surface: #e3e2e3;
+  --inverse-on-surface: #303031;
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.75rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  --gutter: 0.75rem;
+  --margin: 1rem;
+
+  /* Border Radius */
+  --radius-sm: 0.125rem;
+  --radius-default: 0.25rem;
+  --radius-md: 0.375rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+}
+
+/* ========== BASE RESET ========== */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Geist', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+  color: var(--on-surface);
+  background-color: var(--surface-container-lowest);
+  min-height: 100vh;
+  overflow-x: hidden;
+  user-select: none;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ========== TYPOGRAPHY SYSTEM ========== */
+.text-headline-lg {
+  font-family: 'Geist', sans-serif;
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.text-headline-md {
+  font-family: 'Geist', sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.text-headline-sm {
+  font-family: 'Geist', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.text-body-md {
+  font-family: 'Geist', sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 400;
+}
+
+.text-body-sm {
+  font-family: 'Geist', sans-serif;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.text-label-mono-lg {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 14px;
+  line-height: 18px;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+.text-label-mono-md {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 16px;
+  font-weight: 400;
+}
+
+.text-label-mono-sm {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  line-height: 14px;
+  font-weight: 400;
+}
+
+.text-label-sans-caps {
+  font-family: 'Geist', sans-serif;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+/* ========== MATERIAL SYMBOLS ========== */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+  font-size: 16px;
+  line-height: 1;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.material-symbols-outlined.filled {
+  font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+}
+
+/* ========== SCROLLBARS ========== */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: var(--surface-container-lowest);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--surface-container-highest);
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--outline-variant);
+}
+
+/* ========== RANGE INPUT STYLING ========== */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  background: var(--surface-container-lowest);
+  border-radius: 3px;
+  cursor: pointer;
+}
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--primary-container);
+  border: 2px solid var(--surface-container-lowest);
+  cursor: pointer;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--primary-container);
+  border: 2px solid var(--surface-container-lowest);
+  cursor: pointer;
+}
+
+/* ========== FOCUS STATES ========== */
+input:focus, button:focus-visible {
+  outline: 1px solid var(--primary-container);
+  outline-offset: -1px;
+}
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ========== UTILITY ANIMATIONS ========== */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.97); }
+  to { opacity: 1; transform: scale(1); }
+}
+.animate-fade-in {
+  animation: fadeIn 0.2s ease-out;
+}
